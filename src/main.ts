@@ -3,10 +3,13 @@ import { createPinia } from "pinia";
 
 import App from "./app/App.vue";
 import router from "./app/router";
+import { currentUserModel } from "./entities/currentUser";
 
-const app = createApp(App);
+currentUserModel.checkIsUserAuthenticated().finally(() => {
+  const app = createApp(App);
 
-app.use(createPinia());
-app.use(router);
+  app.use(createPinia());
+  app.use(router);
 
-app.mount("#app");
+  app.mount("#app");
+});

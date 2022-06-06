@@ -10,6 +10,7 @@ import type {
   UpdateArticleData,
 } from "./types";
 import { apiClient } from "../apiClient";
+export * from "./types";
 
 export const getArticles = (params: ArticlesParams) =>
   apiClient.get<ArticlesDto>("/articles", { params });
@@ -21,12 +22,12 @@ export const getArticlesFeed = () =>
   apiClient.get<ArticlesDto>("/articles/feed");
 
 export const createArticle = (data: ArticleDto<NewArticleData>) =>
-  apiClient.post<ArticleDto<Article>>("/articles", { data });
+  apiClient.post<ArticleDto<Article>>("/articles", data);
 
 export const updateArticle = (
   slug: string,
   data: ArticleDto<UpdateArticleData>
-) => apiClient.put<ArticleDto<Article>>(`/articles/${slug}`, { data });
+) => apiClient.put<ArticleDto<Article>>(`/articles/${slug}`, data);
 
 export const deleteArticle = (articleSlug: string) =>
   apiClient.delete<void>(`/articles/${articleSlug}`);
@@ -41,9 +42,10 @@ export const createCommentForArticle = (
   articleSlug: string,
   data: CommentDto<NewCommentData>
 ) =>
-  apiClient.post<CommentDto<Comment>>(`/articles/${articleSlug}/comments`, {
-    data,
-  });
+  apiClient.post<CommentDto<Comment>>(
+    `/articles/${articleSlug}/comments`,
+    data
+  );
 
 export const getCommentsForArticle = (articleSlug: string) =>
   apiClient.get<CommentsDto>(`/articles/${articleSlug}/comments`);

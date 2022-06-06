@@ -7,39 +7,10 @@
           <div class="col-md-6 offset-md-3 col-xs-12">
             <h1 class="text-xs-center">Sign up</h1>
             <p class="text-xs-center">
-              <a href="">Have an account?</a>
+              <RouterLink :to="{ name: 'login' }">Have an account?</RouterLink>
             </p>
 
-            <ul class="error-messages">
-              <li>That email is already taken</li>
-            </ul>
-
-            <form>
-              <fieldset class="form-group">
-                <input
-                  class="form-control form-control-lg"
-                  type="text"
-                  placeholder="Your Name"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  class="form-control form-control-lg"
-                  type="text"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  class="form-control form-control-lg"
-                  type="password"
-                  placeholder="Password"
-                />
-              </fieldset>
-              <button class="btn btn-lg btn-primary pull-xs-right">
-                Sign up
-              </button>
-            </form>
+            <VAuthForm type="register" />
           </div>
         </div>
       </div>
@@ -50,4 +21,6 @@
 <script setup lang="ts">
 import { VHeader } from "@/widgets/header";
 import { VLayout } from "@/shared/ui";
+import { VAuthForm } from "@/features/auth";
+import { RouterLink } from "vue-router";
 </script>
