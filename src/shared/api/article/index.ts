@@ -2,6 +2,7 @@ import type {
   Article,
   ArticleDto,
   ArticlesDto,
+  ArticlesPaginationParams,
   ArticlesParams,
   CommentDto,
   CommentsDto,
@@ -18,8 +19,8 @@ export const getArticles = (params: ArticlesParams) =>
 export const getArticle = (slug: string) =>
   apiClient.get<ArticleDto<Article>>(`/articles/${slug}`);
 
-export const getArticlesFeed = () =>
-  apiClient.get<ArticlesDto>("/articles/feed");
+export const getArticlesFeed = (params: ArticlesPaginationParams) =>
+  apiClient.get<ArticlesDto>("/articles/feed", { params });
 
 export const createArticle = (data: ArticleDto<NewArticleData>) =>
   apiClient.post<ArticleDto<Article>>("/articles", data);

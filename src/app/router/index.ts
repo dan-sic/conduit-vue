@@ -6,6 +6,8 @@ import { ArticlePage } from "@/pages/article";
 import { SigninPage } from "@/pages/auth";
 import { SignupPage } from "@/pages/auth";
 import { createRouter, createWebHistory } from "vue-router";
+import { VArticlesList } from "@/features/article";
+import { VFeedArticlesList } from "@/features/article";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,8 +15,19 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home",
       component: HomePage,
+      children: [
+        {
+          path: "",
+          name: "home",
+          component: VArticlesList,
+        },
+        {
+          path: "feed",
+          name: "feed",
+          component: VFeedArticlesList,
+        },
+      ],
     },
     {
       path: "/editor",

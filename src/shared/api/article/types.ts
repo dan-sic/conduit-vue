@@ -29,11 +29,17 @@ export type NewArticleData = Pick<Article, "title" | "description" | "body"> & {
 
 export type UpdateArticleData = Pick<Article, "body">;
 
-export type ArticlesParams = Partial<{
-  tag: Tag;
-  favorited: Username;
-  username: Username;
-}>;
+export type ArticlesPaginationParams = {
+  offset: number;
+  limit: number;
+};
+
+export type ArticlesParams = ArticlesPaginationParams &
+  Partial<{
+    tag: Tag;
+    favorited: Username;
+    author: Username;
+  }>;
 
 export type Comment = {
   id: UniqId;
