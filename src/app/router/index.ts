@@ -6,12 +6,13 @@ import { ArticlePage } from "@/pages/article";
 import { SigninPage } from "@/pages/auth";
 import { SignupPage } from "@/pages/auth";
 import { createRouter, createWebHistory } from "vue-router";
-import { VArticlesList } from "@/features/article";
+import { VArticlesList, VTagArticlesList } from "@/features/article";
 import { VFeedArticlesList } from "@/features/article";
+import { TagsTab } from "@/pages/home/ui";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  linkActiveClass: "active",
+  linkExactActiveClass: "active",
   routes: [
     {
       path: "/",
@@ -26,6 +27,15 @@ const router = createRouter({
           path: "feed",
           name: "feed",
           component: VFeedArticlesList,
+        },
+        {
+          path: "tag/:tagName",
+          name: "tag",
+          components: {
+            default: VTagArticlesList,
+            TagsTab,
+          },
+          props: true,
         },
       ],
     },

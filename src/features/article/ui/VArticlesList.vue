@@ -26,7 +26,7 @@ import {
 import type { Tag } from "@/shared/api/tag";
 import { computed } from "@vue/reactivity";
 import type { AxiosResponse } from "axios";
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, toRefs } from "vue";
 
 const props = defineProps<{
   tag?: Tag;
@@ -36,6 +36,8 @@ const props = defineProps<{
 const currentPage = ref(1);
 const limit = 1;
 const offset = computed(() => (currentPage.value - 1) * limit);
+
+console.log("tag", props.tag);
 
 const articles = ref<Article[]>([]);
 const isLoading = ref(false);

@@ -32,6 +32,7 @@
                     >Global Feed</RouterLink
                   >
                 </li>
+                <RouterView name="TagsTab" />
               </ul>
             </div>
 
@@ -43,14 +44,14 @@
               <p>Popular Tags</p>
 
               <div class="tag-list">
-                <a href="" class="tag-pill tag-default">programming</a>
-                <a href="" class="tag-pill tag-default">javascript</a>
-                <a href="" class="tag-pill tag-default">emberjs</a>
-                <a href="" class="tag-pill tag-default">angularjs</a>
-                <a href="" class="tag-pill tag-default">react</a>
-                <a href="" class="tag-pill tag-default">mean</a>
-                <a href="" class="tag-pill tag-default">node</a>
-                <a href="" class="tag-pill tag-default">rails</a>
+                <RouterLink
+                  v-for="(tag, idx) in tags"
+                  :key="idx"
+                  :to="{ name: 'tag', params: { tagName: tag } }"
+                  class="tag-pill tag-default"
+                  @click="updateRouterViewKey"
+                  >{{ tag }}</RouterLink
+                >
               </div>
             </div>
           </div>
@@ -66,6 +67,19 @@ import { VLayout } from "@/shared/ui";
 import { RouterLink, RouterView } from "vue-router";
 import { useResetRouterView } from "@/shared/lib";
 import { isAuthenticated } from "@/entities/currentUser/model";
+import { tagApi } from "@/shared/api";
+import { onMounted, ref } from "vue";
+import type { Tag } from "@/shared/api/tag";
 
 const { key, updateRouterViewKey } = useResetRouterView();
+
+const tags = ref<Tag[]>([]);
+
+onMounted(async () => {
+  try {
+    tags.value = (await tagApi.getAllTags()).data.tags;
+  } catch (e: unknown) {
+    console.log(e);
+  }
+});
 </script>
