@@ -16,19 +16,7 @@
 
 <script lang="ts">
 export default {
-  beforeRouteEnter: async (to) => {
-    if (!to.params.articleSlug) return true;
-
-    try {
-      const result = await articleApi.getArticle(
-        to.params.articleSlug as string
-      );
-
-      to.meta.editedArticle = result.data.article;
-    } catch (e: unknown) {
-      console.log(e);
-    }
-  },
+  beforeRouteEnter: loadArticleBeforeRouteEnter,
 };
 </script>
 
@@ -36,5 +24,5 @@ export default {
 import { VHeader } from "@/widgets/header";
 import { VLayout } from "@/shared/ui";
 import { VArticleForm } from "@/entities/article";
-import { articleApi } from "@/shared/api";
+import { loadArticleBeforeRouteEnter } from "./lib";
 </script>

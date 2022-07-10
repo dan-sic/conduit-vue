@@ -1,6 +1,6 @@
 import { HomePage } from "@/pages/home";
 import { SettingsPage } from "@/pages/settings";
-import { EditorPage } from "@/pages/editor";
+import { EditorPage } from "@/pages/article";
 import { ProfilePage } from "@/pages/profile";
 import { ArticlePage } from "@/pages/article";
 import { SigninPage } from "@/pages/auth";
@@ -62,8 +62,13 @@ const router = createRouter({
     },
     {
       path: "/article",
+      redirect: "/",
+    },
+    {
+      path: "/article/:articleSlug",
       name: "article",
       component: ArticlePage,
+      props: true,
     },
     {
       path: "/login",

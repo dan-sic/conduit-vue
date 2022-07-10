@@ -1,7 +1,9 @@
 <template>
   <div class="article-preview">
     <div class="article-meta">
-      <RouterLink :to="{ name: 'home' }">
+      <RouterLink
+        :to="{ name: 'article', params: { articleSlug: article.slug } }"
+      >
         <img src="https://api.realworld.io/images/demo-avatar.png" />
         <div class="info">
           <span href="" class="author">{{
@@ -14,7 +16,10 @@
         <i class="ion-heart"></i> 29
       </button> -->
     </div>
-    <RouterLink class="preview-link" :to="{ name: 'article' }">
+    <RouterLink
+      class="preview-link"
+      :to="{ name: 'article', params: { articleSlug: article.slug } }"
+    >
       <h1>{{ props.article.title }}</h1>
       <p>{{ props.article.description }}</p>
       <span>Read more...</span>

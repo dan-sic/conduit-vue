@@ -46,7 +46,7 @@ import VTagControl from "./VTagControl.vue";
 
 const router = useRouter();
 
-const editedArticle = router.currentRoute.value.meta.editedArticle as
+const editedArticle = router.currentRoute.value.meta.article as
   | Article
   | undefined;
 
