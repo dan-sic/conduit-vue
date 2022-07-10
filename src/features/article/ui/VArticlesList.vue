@@ -37,8 +37,6 @@ const currentPage = ref(1);
 const limit = 1;
 const offset = computed(() => (currentPage.value - 1) * limit);
 
-console.log("tag", props.tag);
-
 const articles = ref<Article[]>([]);
 const isLoading = ref(false);
 const isNoArticles = computed(

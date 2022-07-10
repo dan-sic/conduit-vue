@@ -16,6 +16,5 @@ apiClient.interceptors.request.use((requestConfig) => {
     Authorization: `Token ${authToken}`,
   };
 
-  console.log(headers);
   return { ...requestConfig, headers };
 });

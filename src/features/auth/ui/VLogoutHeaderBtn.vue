@@ -11,8 +11,6 @@ const router = useRouter();
 const onClick = () => {
   logoutUser();
 
-  console.log(router);
-
   router.replace({ name: "login" });
 };
 </script>

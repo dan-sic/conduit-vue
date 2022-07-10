@@ -1,11 +1,5 @@
 <template>
-  <ul
-    class="error-messages"
-    :key="idx"
-    v-for="(error, idx) in validationErrors"
-  >
-    <li>{{ error }}</li>
-  </ul>
+  <ValidationErrors :validation-errors="validationErrors" />
 
   <form @submit.prevent="onSubmit">
     <fieldset v-if="isRegisterForm" class="form-group">
@@ -43,6 +37,7 @@ import { currentUserModel } from "@/entities/currentUser";
 import { getApiErrorMessages } from "@/shared/lib";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { ValidationErrors } from "@/shared/ui";
 const props = defineProps<{
   type: "register" | "login";
 }>();

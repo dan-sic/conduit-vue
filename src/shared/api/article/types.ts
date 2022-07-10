@@ -6,7 +6,7 @@ export type Article = {
   title: string;
   description: string;
   body: string;
-  tags: Tag[];
+  tagList: Tag[];
   createdAt: DateAsISOString;
   updatedAt: DateAsISOString;
   favorited: boolean;
@@ -24,10 +24,10 @@ export type ArticleDto<T> = {
 };
 
 export type NewArticleData = Pick<Article, "title" | "description" | "body"> & {
-  tagList: Tag[];
+  tagList?: Tag[];
 };
 
-export type UpdateArticleData = Pick<Article, "body">;
+export type UpdateArticleData = Partial<NewArticleData>;
 
 export type ArticlesPaginationParams = {
   offset: number;

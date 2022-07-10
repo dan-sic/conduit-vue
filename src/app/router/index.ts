@@ -40,6 +40,12 @@ const router = createRouter({
       ],
     },
     {
+      path: "/editor/:articleSlug",
+      name: "editorEdit",
+      component: EditorPage,
+      props: true,
+    },
+    {
       path: "/editor",
       name: "editor",
       component: EditorPage,
