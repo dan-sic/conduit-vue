@@ -15,3 +15,15 @@ export const updateArticle = async (
 
   return res.data;
 };
+
+export const favoriteArticle = async (slug: string) => {
+  const res = await articleApi.favoriteArticle(slug);
+
+  return res.data;
+};
+
+export const unfavoriteArticle = async (slug: string) => {
+  const res = await articleApi.unfavoriteArticle(slug);
+
+  return res.data;
+};

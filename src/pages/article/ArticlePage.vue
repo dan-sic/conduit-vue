@@ -5,6 +5,8 @@
         <h1>{{ article.title }}</h1>
 
         <VFollowProfile :profile="article.author" />
+        &nbsp;&nbsp;
+        <VFavouriteArticle :article="article" />
 
         <!-- <div class="article-meta">
           <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
@@ -139,6 +141,7 @@ import { loadArticleBeforeRouteEnter } from "./lib";
 import { useRouter } from "vue-router";
 import type { Article } from "@/shared/api/article";
 import { VFollowProfile } from "@/features/profile";
+import { VFavouriteArticle } from "@/features/article";
 
 const router = useRouter();
 
