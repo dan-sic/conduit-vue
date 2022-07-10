@@ -6,8 +6,8 @@ import { ArticlePage } from "@/pages/article";
 import { SigninPage } from "@/pages/auth";
 import { SignupPage } from "@/pages/auth";
 import { createRouter, createWebHistory } from "vue-router";
-import { VArticlesList, VTagArticlesList } from "@/features/article";
-import { VFeedArticlesList } from "@/features/article";
+import { VArticlesList, VTagArticlesList } from "@/entities/article";
+import { VFeedArticlesList } from "@/entities/article";
 import { TagsTab } from "@/pages/home/ui";
 
 const router = createRouter({

@@ -35,6 +35,6 @@ export default {
 <script lang="ts" setup>
 import { VHeader } from "@/widgets/header";
 import { VLayout } from "@/shared/ui";
-import { VArticleForm } from "@/features/article";
+import { VArticleForm } from "@/entities/article";
 import { articleApi } from "@/shared/api";
 </script>
