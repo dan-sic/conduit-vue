@@ -34,7 +34,7 @@ const props = defineProps<{
 }>();
 
 const currentPage = ref(1);
-const limit = 1;
+const limit = 2;
 const offset = computed(() => (currentPage.value - 1) * limit);
 
 const articles = ref<Article[]>([]);

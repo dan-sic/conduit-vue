@@ -1,4 +1,4 @@
-import type { Profile } from "../profile/types";
+import type { ProfileBase } from "../profile/types";
 
 export type UpdateUserData = {
   email: string;
@@ -16,6 +16,7 @@ export type AuthDto<T> = {
   user: T;
 };
 
-export type ProfileWithToken = Profile & {
+export type CurrentUserProfile = ProfileBase & {
   token: string;
+  email: string;
 };

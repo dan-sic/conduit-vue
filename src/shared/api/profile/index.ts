@@ -1,12 +1,12 @@
 import { apiClient } from "../apiClient";
-import type { ProfileDto } from "./types";
+import type { UserProfileDto, Username } from "./types";
 export * from "./types";
 
-export const getProfile = (username: string) =>
-  apiClient.get<ProfileDto>(`/profiles/${username}`);
+export const getProfile = (username: Username) =>
+  apiClient.get<UserProfileDto>(`/profiles/${username}`);
 
-export const followProfile = (username: string) =>
-  apiClient.post<ProfileDto>(`/profiles/${username}/follow`);
+export const followProfile = (username: Username) =>
+  apiClient.post<UserProfileDto>(`/profiles/${username}/follow`);
 
-export const unfollowProfile = (username: string) =>
-  apiClient.delete<ProfileDto>(`/profiles/${username}/follow`);
+export const unfollowProfile = (username: Username) =>
+  apiClient.delete<UserProfileDto>(`/profiles/${username}/follow`);

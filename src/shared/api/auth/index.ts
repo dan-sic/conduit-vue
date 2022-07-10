@@ -2,20 +2,20 @@ import { apiClient } from "../apiClient";
 import type {
   AuthDto,
   LoginData,
-  ProfileWithToken,
+  CurrentUserProfile,
   RegisterData,
   UpdateUserData,
 } from "./types";
 export * from "./types";
 
 export const register = (data: AuthDto<RegisterData>) =>
-  apiClient.post<AuthDto<ProfileWithToken>>("/users", data);
+  apiClient.post<AuthDto<CurrentUserProfile>>("/users", data);
 
 export const login = (data: AuthDto<LoginData>) =>
-  apiClient.post<AuthDto<ProfileWithToken>>("/users/login", data);
+  apiClient.post<AuthDto<CurrentUserProfile>>("/users/login", data);
 
 export const updateUser = (data: AuthDto<UpdateUserData>) =>
-  apiClient.post<AuthDto<ProfileWithToken>>("/users/login", data);
+  apiClient.post<AuthDto<CurrentUserProfile>>("/users/login", data);
 
 export const getCurrentUser = () =>
-  apiClient.get<AuthDto<ProfileWithToken>>("/user");
+  apiClient.get<AuthDto<CurrentUserProfile>>("/user");

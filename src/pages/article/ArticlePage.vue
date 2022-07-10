@@ -4,6 +4,8 @@
       <div class="container">
         <h1>{{ article.title }}</h1>
 
+        <VFollowProfile :profile="article.author" />
+
         <!-- <div class="article-meta">
           <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
           <div class="info">
@@ -136,6 +138,7 @@ export default {
 import { loadArticleBeforeRouteEnter } from "./lib";
 import { useRouter } from "vue-router";
 import type { Article } from "@/shared/api/article";
+import { VFollowProfile } from "@/features/profile";
 
 const router = useRouter();
 

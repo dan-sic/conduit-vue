@@ -1,4 +1,4 @@
-import type { Profile, Username } from "../profile/types";
+import type { Username, UserProfile } from "../profile/types";
 import type { Tag } from "../tag/types";
 
 export type Article = {
@@ -11,7 +11,7 @@ export type Article = {
   updatedAt: DateAsISOString;
   favorited: boolean;
   favoritesCount: number;
-  author: Profile;
+  author: UserProfile;
 };
 
 export type ArticlesDto = {
@@ -46,7 +46,7 @@ export type Comment = {
   createdAt: DateAsISOString;
   updatedAt: DateAsISOString;
   body: string;
-  author: Profile;
+  author: UserProfile;
 };
 
 export type CommentsDto = {

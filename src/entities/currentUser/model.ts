@@ -2,14 +2,13 @@ import type {
   RegisterData,
   LoginData,
   UpdateUserData,
-  ProfileWithToken,
+  CurrentUserProfile,
 } from "@/shared/api/auth";
-import type { Profile } from "@/shared/api/profile";
 import { computed, ref } from "vue";
 import { authApi } from "@/shared/api";
 import { persistAuthToken } from "@/shared/lib";
 
-export const currentUser = ref<Profile | null>(null);
+export const currentUser = ref<CurrentUserProfile | null>(null);
 export const isAuthenticated = computed(() => !!currentUser.value);
 
 export const updateCurrentUser = async (data: UpdateUserData) => {
@@ -36,10 +35,8 @@ export const checkIsUserAuthenticated = async () => {
   saveUser(res.data.user);
 };
 
-const saveUser = (profile: ProfileWithToken) => {
-  const { token, ...rest } = profile;
+const saveUser = (profile: CurrentUserProfile) => {
+  persistAuthToken(profile.token);
 
-  persistAuthToken(token);
-
-  currentUser.value = rest;
+  currentUser.value = profile;
 };
