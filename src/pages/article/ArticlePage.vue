@@ -32,27 +32,22 @@
 
         <hr />
 
-        <!-- <div class="article-actions">
-        <div class="article-meta">
-          <a href="profile.html"
-            ><img src="http://i.imgur.com/Qr71crq.jpg"
-          /></a>
-          <div class="info">
-            <a href="" class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
+        <div class="article-actions">
+          <div class="article-meta">
+            <VAuthorPreview
+              :author="article.author"
+              :article-date="article.createdAt"
+            />
+            <VFollowProfile :profile="article.author" />
+            &nbsp;&nbsp;
+            <VFavouriteArticle :article="article" />
           </div>
-
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-            &nbsp; Follow Eric Simons
-          </button>
-          &nbsp;
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart"></i>
-            &nbsp; Favorite Post <span class="counter">(29)</span>
-          </button>
         </div>
-      </div> -->
+        <div class="row">
+          <div class="col-xs-12 col-md-8 offset-md-2">
+            <VArticlesComments :comments="articleComments" />
+          </div>
+        </div>
 
         <!-- <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
@@ -131,14 +126,30 @@ export default {
 <script lang="ts" setup>
 import { loadArticleBeforeRouteEnter } from "./lib";
 import { useRouter } from "vue-router";
-import type { Article } from "@/shared/api/article";
+import type { Article, Comment } from "@/shared/api/article";
 import { VFollowProfile } from "@/features/profile";
 import { VFavouriteArticle } from "@/features/article";
 import { VHeader } from "@/widgets/header";
 import { VLayout } from "@/shared/ui";
-import { VAuthorPreview } from "@/entities/article";
+import {
+  VAuthorPreview,
+  VArticlesComments,
+  articleModel,
+} from "@/entities/article";
+import { onMounted, ref } from "vue";
 
 const router = useRouter();
 
 const article = router.currentRoute.value.meta.article as Article;
+
+const articleComments = ref<Comment[]>([]);
+
+onMounted(async () => {
+  try {
+    const res = await articleModel.getCommentsForArticle(article.slug);
+    articleComments.value = res.comments;
+  } catch (e: unknown) {
+    console.log(e);
+  }
+});
 </script>

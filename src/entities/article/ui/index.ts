@@ -4,6 +4,7 @@ import VTagArticlesList from "./VTagArticlesList.vue";
 import VArticleForm from "./VArticleForm.vue";
 import VArticlePreview from "./VArticlePreview.vue";
 import VAuthorPreview from "./VAuthorPreview.vue";
+import VArticlesComments from "./VArticlesComments.vue";
 
 export {
   VArticlesList,
@@ -12,4 +13,5 @@ export {
   VTagArticlesList,
   VArticleForm,
   VAuthorPreview,
+  VArticlesComments,
 };

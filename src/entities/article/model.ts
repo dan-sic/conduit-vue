@@ -27,3 +27,9 @@ export const unfavoriteArticle = async (slug: string) => {
 
   return res.data;
 };
+
+export const getCommentsForArticle = async (slug: string) => {
+  const res = await articleApi.getCommentsForArticle(slug);
+
+  return res.data;
+};
