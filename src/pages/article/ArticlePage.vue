@@ -11,9 +11,9 @@
               :author="article.author"
               :article-date="article.createdAt"
             />
-            <VFollowProfile :profile="article.author" />
+            <VFollowProfile v-model="author" />
             &nbsp;&nbsp;
-            <VFavouriteArticle :article="article" />
+            <VFavouriteArticle v-model="article" />
           </div>
         </div>
       </div>
@@ -38,9 +38,9 @@
               :author="article.author"
               :article-date="article.createdAt"
             />
-            <VFollowProfile :profile="article.author" />
+            <VFollowProfile v-model="author" />
             &nbsp;&nbsp;
-            <VFavouriteArticle :article="article" />
+            <VFavouriteArticle v-model="article" />
           </div>
         </div>
         <div class="row">
@@ -79,7 +79,8 @@ import { onMounted, ref } from "vue";
 
 const router = useRouter();
 
-const article = router.currentRoute.value.meta.article as Article;
+const article = ref(router.currentRoute.value.meta.article as Article);
+const author = ref(article.value.author);
 
 const articleComments = ref<Comment[]>([]);
 
@@ -93,7 +94,7 @@ const onCommentAdded = () => {
 
 const fetchComments = async () => {
   try {
-    const res = await articleModel.getCommentsForArticle(article.slug);
+    const res = await articleModel.getCommentsForArticle(article.value.slug);
     articleComments.value = res.comments;
   } catch (e: unknown) {
     console.log(e);

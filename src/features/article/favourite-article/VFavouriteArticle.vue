@@ -15,32 +15,35 @@
 import { articleModel } from "@/entities/article";
 import { currentUserModel } from "@/entities/currentUser";
 import type { Article } from "@/shared/api/article";
-import { ref } from "vue";
+import { computed } from "@vue/reactivity";
 
 const props = defineProps<{
-  article: Article;
+  modelValue: Article;
 }>();
 
-const showButton =
-  currentUserModel.currentUser.value?.username !==
-  props.article.author.username;
+const emits = defineEmits<{
+  (e: "update:modelValue", article: Article): void;
+}>();
 
-const favouritedArticle = ref(props.article.favorited);
-const favouritedCount = ref(props.article.favoritesCount);
+const showButton = computed(
+  () =>
+    currentUserModel.currentUser.value?.username !==
+    props.modelValue.author.username
+);
+
+const favouritedArticle = computed(() => props.modelValue.favorited);
+const favouritedCount = computed(() => props.modelValue.favoritesCount);
 
 const onClick = async () => {
+  let article: Article;
   try {
     if (favouritedArticle.value) {
-      await articleModel.unfavoriteArticle(props.article.slug);
-
-      favouritedArticle.value = false;
-      favouritedCount.value--;
+      article = await articleModel.unfavoriteArticle(props.modelValue.slug);
     } else {
-      await articleModel.favoriteArticle(props.article.slug);
-
-      favouritedArticle.value = true;
-      favouritedCount.value++;
+      article = await articleModel.favoriteArticle(props.modelValue.slug);
     }
+
+    emits("update:modelValue", article);
   } catch (e: unknown) {
     console.log(e);
   }
