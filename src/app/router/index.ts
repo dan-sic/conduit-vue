@@ -61,11 +61,6 @@ const router = createRouter({
       component: SettingsPage,
     },
     {
-      path: "/settings",
-      name: "profile",
-      component: ProfilePage,
-    },
-    {
       path: "/article",
       redirect: "/",
     },

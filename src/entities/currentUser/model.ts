@@ -12,9 +12,12 @@ export const currentUser = ref<CurrentUserProfile | null>(null);
 export const isAuthenticated = computed(() => !!currentUser.value);
 
 export const updateCurrentUser = async (data: UpdateUserData) => {
+  console.log(data);
   const res = await authApi.updateUser({ user: data });
 
   currentUser.value = res.data.user;
+
+  return res.data.user;
 };
 
 export const registerUser = async (data: RegisterData) => {

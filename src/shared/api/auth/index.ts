@@ -14,8 +14,10 @@ export const register = (data: AuthDto<RegisterData>) =>
 export const login = (data: AuthDto<LoginData>) =>
   apiClient.post<AuthDto<CurrentUserProfile>>("/users/login", data);
 
-export const updateUser = (data: AuthDto<UpdateUserData>) =>
-  apiClient.post<AuthDto<CurrentUserProfile>>("/users/login", data);
+export const updateUser = (data: AuthDto<UpdateUserData>) => {
+  console.log(data);
+  return apiClient.put<AuthDto<CurrentUserProfile>>("/user", data);
+};
 
 export const getCurrentUser = () =>
   apiClient.get<AuthDto<CurrentUserProfile>>("/user");
