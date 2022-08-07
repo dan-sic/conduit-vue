@@ -23,13 +23,16 @@ import {
   type Article,
   type ArticlesDto,
 } from "@/shared/api/article";
+import type { Username, UserProfile } from "@/shared/api/profile";
 import type { Tag } from "@/shared/api/tag";
 import { computed } from "@vue/reactivity";
 import type { AxiosResponse } from "axios";
-import { ref, watchEffect, toRefs } from "vue";
+import { ref, watchEffect } from "vue";
 
 const props = defineProps<{
   tag?: Tag;
+  author?: Username;
+  favorited?: Username;
   showFeed?: boolean;
 }>();
 
@@ -57,6 +60,8 @@ watchEffect(async () => {
       response = await getArticles({
         ...paginationParams,
         tag: props.tag,
+        author: props?.author,
+        favorited: props?.favorited,
       });
     }
 

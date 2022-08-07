@@ -5,7 +5,10 @@
     "
   />
   <div class="info">
-    <RouterLink class="author" :to="{ name: 'home' }">
+    <RouterLink
+      class="author"
+      :to="{ name: 'user', params: { userName: props.author.username } }"
+    >
       {{ props.author.username }}
     </RouterLink>
     <span class="date">{{ formattedDate }}</span>

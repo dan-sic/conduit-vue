@@ -6,7 +6,12 @@ import { ArticlePage } from "@/pages/article";
 import { SigninPage } from "@/pages/auth";
 import { SignupPage } from "@/pages/auth";
 import { createRouter, createWebHistory } from "vue-router";
-import { VArticlesList, VTagArticlesList } from "@/entities/article";
+import {
+  VArticlesList,
+  VTagArticlesList,
+  VUserArticlesList,
+  VUserFavouritedArticlesList,
+} from "@/entities/article";
 import { VFeedArticlesList } from "@/entities/article";
 import { TagsTab } from "@/pages/home/ui";
 
@@ -79,6 +84,22 @@ const router = createRouter({
       path: "/register",
       name: "register",
       component: SignupPage,
+    },
+    {
+      path: "/:userName",
+      component: ProfilePage,
+      children: [
+        {
+          path: "",
+          name: "user",
+          component: VUserArticlesList,
+        },
+        {
+          path: "/favourited",
+          name: "userFavourited",
+          component: VUserFavouritedArticlesList,
+        },
+      ],
     },
   ],
 });
