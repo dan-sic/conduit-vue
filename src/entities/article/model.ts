@@ -36,17 +36,17 @@ export const deleteArticle = async (slug: string) => {
   articleApi.deleteArticle(slug);
 };
 
-export const getCommentsForArticle = async (slug: string) => {
-  const res = await articleApi.getCommentsForArticle(slug);
+// export const getCommentsForArticle = async (slug: string) => {
+//   const res = await articleApi.getCommentsForArticle(slug);
 
-  return res.data;
-};
+//   return res.data;
+// };
 
-export const createCommentForArticle = async (
-  slug: string,
-  data: NewCommentData
-) => {
-  const res = await articleApi.createCommentForArticle(slug, { comment: data });
+// export const createCommentForArticle = async (
+//   slug: string,
+//   data: NewCommentData
+// ) => {
+//   const res = await articleApi.createCommentForArticle(slug, { comment: data });
 
-  return res.data;
-};
+//   return res.data;
+// };

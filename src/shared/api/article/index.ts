@@ -5,6 +5,7 @@ import type {
   ArticlesPaginationParams,
   ArticlesParams,
   CommentDto,
+  Comment,
   CommentsDto,
   NewArticleData,
   NewCommentData,
@@ -51,7 +52,7 @@ export const createCommentForArticle = (
 export const getCommentsForArticle = (articleSlug: string) =>
   apiClient.get<CommentsDto>(`/articles/${articleSlug}/comments`);
 
-export const deleteCommentsForArticle = (
+export const deleteCommentForArticle = (
   articleSlug: string,
   commentId: UniqId
 ) => apiClient.delete<void>(`/articles/${articleSlug}/comments/${commentId}`);

@@ -15,27 +15,22 @@
 </template>
 
 <script setup lang="ts">
-import { articleModel } from "@/entities/article";
+import { commentModel } from "@/entities/comment";
 import { ref } from "vue";
 
 const props = defineProps<{
   articleSlug: string;
 }>();
 
-const emits = defineEmits<{
-  (e: "commentAdded"): void;
-}>();
-
 const commentBody = ref("");
 
 const onSubmit = async () => {
   try {
-    await articleModel.createCommentForArticle(props.articleSlug, {
+    await commentModel.createCommentForArticle(props.articleSlug, {
       body: commentBody.value,
     });
 
     commentBody.value = "";
-    emits("commentAdded");
   } catch (e: unknown) {
     console.log(e);
   }

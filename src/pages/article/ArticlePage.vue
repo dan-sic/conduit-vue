@@ -59,11 +59,16 @@
         </div>
         <div class="row">
           <div class="col-xs-12 col-md-8 offset-md-2">
-            <VAddArticleComment
-              :article-slug="article.slug"
-              @commentAdded="onCommentAdded"
-            />
-            <VArticlesComments :comments="articleComments" />
+            <VAddComment :article-slug="article.slug" />
+            <VArticleComment
+              v-for="comment in articleComments"
+              :comment="comment"
+              :key="comment.id"
+            >
+              <template #footer-right-align
+                ><VDeleteComment :article="article" :comment-id="comment.id"
+              /></template>
+            </VArticleComment>
           </div>
         </div>
       </div>
@@ -79,24 +84,20 @@ export default {
 <script lang="ts" setup>
 import { loadArticleBeforeRouteEnter } from "./lib";
 import { useRouter } from "vue-router";
-import type { Article, Comment } from "@/shared/api/article";
+import type { Article } from "@/shared/api/article";
 import { VFollowProfile } from "@/features/profile";
-import {
-  VFavouriteArticle,
-  VAddArticleComment,
-  VDeleteArticle,
-} from "@/features/article";
+import { VFavouriteArticle, VDeleteArticle } from "@/features/article";
 import { VArticleEditLink } from "@/entities/article";
 import { VHeader } from "@/widgets/header";
 import { VLayout } from "@/shared/ui";
-import {
-  VAuthorPreview,
-  VArticlesComments,
-  articleModel,
-} from "@/entities/article";
+import { VAuthorPreview } from "@/entities/article";
 import { onMounted, ref } from "vue";
 import { currentUserModel } from "@/entities/currentUser";
 import { computed } from "@vue/reactivity";
+import { commentModel } from "@/entities/comment";
+import { VArticleComment } from "@/entities/comment";
+import { VAddComment } from "@/features/comment";
+import VDeleteComment from "../../features/comment/delete-comment/VDeleteComment.vue";
 
 const router = useRouter();
 
@@ -106,22 +107,11 @@ const isCurrentUserArticle = computed(
   () => currentUserModel.currentUser.value?.username === author.value.username
 );
 
-const articleComments = ref<Comment[]>([]);
+const articleComments = computed(
+  () => commentModel.articlesComments.value[article.value.slug]
+);
 
 onMounted(() => {
-  fetchComments();
+  commentModel.getCommentsForArticle(article.value.slug);
 });
-
-const onCommentAdded = () => {
-  fetchComments();
-};
-
-const fetchComments = async () => {
-  try {
-    const res = await articleModel.getCommentsForArticle(article.value.slug);
-    articleComments.value = res.comments;
-  } catch (e: unknown) {
-    console.log(e);
-  }
-};
 </script>
