@@ -42,5 +42,3 @@ import { RouterLink } from "vue-router";
 import { currentUserModel } from "@/entities/currentUser";
 import { VLogoutHeaderBtn } from "@/features/auth";
 </script>
-
-<style scoped></style>

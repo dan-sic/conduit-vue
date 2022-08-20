@@ -3,13 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import { logoutUser } from "../model/logout";
+import { currentUserModel } from "@/entities/currentUser";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const onClick = () => {
-  logoutUser();
+  currentUserModel.logoutUser();
 
   router.replace({ name: "login" });
 };
