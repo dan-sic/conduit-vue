@@ -7,6 +7,7 @@ import VArticleForm from "./VArticleForm.vue";
 import VArticlePreview from "./VArticlePreview.vue";
 import VAuthorPreview from "./VAuthorPreview.vue";
 import VArticlesComments from "./VArticlesComments.vue";
+import VArticleEditLink from "./VArticleEditLink.vue";
 
 export {
   VArticlesList,
@@ -18,4 +19,5 @@ export {
   VArticlesComments,
   VUserArticlesList,
   VUserFavouritedArticlesList,
+  VArticleEditLink,
 };

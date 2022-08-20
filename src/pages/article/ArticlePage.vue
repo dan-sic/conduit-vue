@@ -14,7 +14,11 @@
             <VFollowProfile v-model="author" />
             &nbsp;&nbsp;
             <VFavouriteArticle v-model="article" />
-            <VDeleteArticle :article="article" />
+            <template v-if="isCurrentUserArticle">
+              <VArticleEditLink :slug="article.slug" />
+              &nbsp;&nbsp;
+              <VDeleteArticle :article="article" />
+            </template>
           </div>
         </div>
       </div>
@@ -42,6 +46,11 @@
             <VFollowProfile v-model="author" />
             &nbsp;&nbsp;
             <VFavouriteArticle v-model="article" />
+            <VArticleEditLink
+              v-if="isCurrentUserArticle"
+              :slug="article.slug"
+            />
+            &nbsp;&nbsp;
             <VDeleteArticle :article="article" />
           </div>
         </div>
@@ -74,6 +83,7 @@ import {
   VAddArticleComment,
   VDeleteArticle,
 } from "@/features/article";
+import { VArticleEditLink } from "@/entities/article";
 import { VHeader } from "@/widgets/header";
 import { VLayout } from "@/shared/ui";
 import {
@@ -82,11 +92,16 @@ import {
   articleModel,
 } from "@/entities/article";
 import { onMounted, ref } from "vue";
+import { currentUserModel } from "@/entities/currentUser";
+import { computed } from "@vue/reactivity";
 
 const router = useRouter();
 
 const article = ref(router.currentRoute.value.meta.article as Article);
 const author = ref(article.value.author);
+const isCurrentUserArticle = computed(
+  () => currentUserModel.currentUser.value?.username === author.value.username
+);
 
 const articleComments = ref<Comment[]>([]);
 
