@@ -11,13 +11,15 @@
               :author="article.author"
               :article-date="article.createdAt"
             />
-            <VFollowProfile v-model="author" />
-            &nbsp;&nbsp;
-            <VFavouriteArticle v-model="article" />
+            <template v-if="!isCurrentUserArticle">
+              <VFollowProfile v-model="author" />
+              &nbsp;&nbsp;
+              <VFavouriteArticle v-model="article" />
+            </template>
             <template v-if="isCurrentUserArticle">
               <VArticleEditLink :slug="article.slug" />
               &nbsp;&nbsp;
-              <VDeleteArticle :article="article" />
+              <VDeleteArticle :slug="article.slug" />
             </template>
           </div>
         </div>
@@ -43,15 +45,16 @@
               :author="article.author"
               :article-date="article.createdAt"
             />
-            <VFollowProfile v-model="author" />
-            &nbsp;&nbsp;
-            <VFavouriteArticle v-model="article" />
-            <VArticleEditLink
-              v-if="isCurrentUserArticle"
-              :slug="article.slug"
-            />
-            &nbsp;&nbsp;
-            <VDeleteArticle :article="article" />
+            <template v-if="!isCurrentUserArticle">
+              <VFollowProfile v-model="author" />
+              &nbsp;&nbsp;
+              <VFavouriteArticle v-model="article" />
+            </template>
+            <template v-if="isCurrentUserArticle">
+              <VArticleEditLink :slug="article.slug" />
+              &nbsp;&nbsp;
+              <VDeleteArticle :slug="article.slug" />
+            </template>
           </div>
         </div>
         <div class="row">

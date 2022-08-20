@@ -1,6 +1,5 @@
 <template>
   <button
-    v-if="showButton"
     class="btn btn-sm"
     :class="[favouritedArticle ? 'btn-primary' : 'btn-outline-primary']"
     @click="onClick"
@@ -13,7 +12,6 @@
 
 <script setup lang="ts">
 import { articleModel } from "@/entities/article";
-import { currentUserModel } from "@/entities/currentUser";
 import type { Article } from "@/shared/api/article";
 import { computed } from "@vue/reactivity";
 
@@ -24,12 +22,6 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: "update:modelValue", article: Article): void;
 }>();
-
-const showButton = computed(
-  () =>
-    currentUserModel.currentUser.value?.username !==
-    props.modelValue.author.username
-);
 
 const favouritedArticle = computed(() => props.modelValue.favorited);
 const favouritedCount = computed(() => props.modelValue.favoritesCount);

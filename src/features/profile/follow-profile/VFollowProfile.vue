@@ -1,6 +1,5 @@
 <template>
   <button
-    v-if="showButton"
     class="btn btn-sm"
     :class="[
       props.modelValue.following ? 'btn-secondary' : 'btn-outline-secondary',
@@ -14,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { currentUserModel } from "@/entities/currentUser";
 import { profileModel } from "@/entities/profile";
 import type { UserProfile } from "@/shared/api/profile";
 
@@ -25,9 +23,6 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: "update:modelValue", author: UserProfile): void;
 }>();
-
-const showButton =
-  currentUserModel.currentUser.value?.username !== props.modelValue.username;
 
 const onClick = async () => {
   let userProfile: UserProfile;
