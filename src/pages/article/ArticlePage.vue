@@ -14,6 +14,7 @@
             <VFollowProfile v-model="author" />
             &nbsp;&nbsp;
             <VFavouriteArticle v-model="article" />
+            <VDeleteArticle :article="article" />
           </div>
         </div>
       </div>
@@ -41,6 +42,7 @@
             <VFollowProfile v-model="author" />
             &nbsp;&nbsp;
             <VFavouriteArticle v-model="article" />
+            <VDeleteArticle :article="article" />
           </div>
         </div>
         <div class="row">
@@ -67,7 +69,11 @@ import { loadArticleBeforeRouteEnter } from "./lib";
 import { useRouter } from "vue-router";
 import type { Article, Comment } from "@/shared/api/article";
 import { VFollowProfile } from "@/features/profile";
-import { VFavouriteArticle, VAddArticleComment } from "@/features/article";
+import {
+  VFavouriteArticle,
+  VAddArticleComment,
+  VDeleteArticle,
+} from "@/features/article";
 import { VHeader } from "@/widgets/header";
 import { VLayout } from "@/shared/ui";
 import {

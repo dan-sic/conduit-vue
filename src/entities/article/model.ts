@@ -32,6 +32,10 @@ export const unfavoriteArticle = async (slug: string) => {
   return res.data.article;
 };
 
+export const deleteArticle = async (slug: string) => {
+  articleApi.deleteArticle(slug);
+};
+
 export const getCommentsForArticle = async (slug: string) => {
   const res = await articleApi.getCommentsForArticle(slug);
 
