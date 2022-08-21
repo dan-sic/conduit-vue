@@ -23,7 +23,7 @@ import {
   type Article,
   type ArticlesDto,
 } from "@/shared/api/article";
-import type { Username, UserProfile } from "@/shared/api/profile";
+import type { Username } from "@/shared/api/profile";
 import type { Tag } from "@/shared/api/tag";
 import { computed } from "@vue/reactivity";
 import type { AxiosResponse } from "axios";

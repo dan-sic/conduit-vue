@@ -11,12 +11,12 @@
               :author="article.author"
               :article-date="article.createdAt"
             />
-            <template v-if="!isCurrentUserArticle">
+            <template v-if="isCurrentUser && !isCurrentUserArticle">
               <VFollowProfile v-model="author" />
               &nbsp;&nbsp;
               <VFavouriteArticle v-model="article" />
             </template>
-            <template v-if="isCurrentUserArticle">
+            <template v-if="isCurrentUser && isCurrentUserArticle">
               <VArticleEditLink :slug="article.slug" />
               &nbsp;&nbsp;
               <VDeleteArticle :slug="article.slug" />
@@ -45,12 +45,12 @@
               :author="article.author"
               :article-date="article.createdAt"
             />
-            <template v-if="!isCurrentUserArticle">
+            <template v-if="isCurrentUser && !isCurrentUserArticle">
               <VFollowProfile v-model="author" />
               &nbsp;&nbsp;
               <VFavouriteArticle v-model="article" />
             </template>
-            <template v-if="isCurrentUserArticle">
+            <template v-if="isCurrentUser && isCurrentUserArticle">
               <VArticleEditLink :slug="article.slug" />
               &nbsp;&nbsp;
               <VDeleteArticle :slug="article.slug" />
@@ -103,6 +103,7 @@ const router = useRouter();
 
 const article = ref(router.currentRoute.value.meta.article as Article);
 const author = ref(article.value.author);
+const isCurrentUser = computed(() => !!currentUserModel.currentUser.value);
 const isCurrentUserArticle = computed(
   () => currentUserModel.currentUser.value?.username === author.value.username
 );
